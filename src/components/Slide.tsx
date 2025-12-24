@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import DecryptedText from "./DecryptedText";
 
 interface SlideProps {
   children: ReactNode;
@@ -87,7 +88,7 @@ export function Slide({ children, className = "", id }: SlideProps) {
   );
 }
 
-export function SlideTitle({ children, accent = false }: { children: ReactNode; accent?: boolean }) {
+export function SlideTitle({ children, accent = false }: { children: string; accent?: boolean }) {
   return (
     <motion.h1
       variants={fadeUpVariants}
@@ -95,7 +96,15 @@ export function SlideTitle({ children, accent = false }: { children: ReactNode; 
         accent ? "text-[var(--accent)]" : "text-white"
       }`}
     >
-      {children}
+      <DecryptedText
+        text={children}
+        animateOn="view"
+        sequential={true}
+        speed={60}
+        maxIterations={10}
+        revealDirection="start"
+        characters="abcdefghijklmnopqrstuvwxyz!@#$%^&*(){}[]<>?/\|;:=+-_~`0123456789"
+      />
     </motion.h1>
   );
 }

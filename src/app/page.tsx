@@ -21,6 +21,50 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Navigation } from "@/components/Navigation";
 import { slides } from "@/data/slides";
+import DecryptedText from "@/components/DecryptedText";
+import {
+  Target,
+  Palette,
+  Code2,
+  Megaphone,
+  Zap,
+  LineChart,
+  Compass,
+  GitMerge,
+  Handshake,
+  Rocket,
+  TrendingUp,
+  Globe,
+  Ticket,
+  Sparkles,
+  LifeBuoy,
+  type LucideIcon
+} from "lucide-react";
+
+const aboutIcons: Record<string, LucideIcon> = {
+  "стратегии": Target,
+  "UX/UI": Palette,
+  "веб- и платформенной разработки": Code2,
+  "маркетинга": Megaphone,
+  "автоматизации": Zap,
+  "аналитики": LineChart,
+};
+
+const philosophyIcons: Record<string, LucideIcon> = {
+  "Подход": Compass,
+  "Принцип": GitMerge,
+  "Роль агентства": Handshake,
+};
+
+const solutionsIcons: Record<string, LucideIcon> = {
+  "Запуск бизнеса": Rocket,
+  "Рост продаж": TrendingUp,
+  "Онлайн-платформы": Globe,
+  "Event-решения": Ticket,
+  "Автоматизация": Zap,
+  "Брендинг": Sparkles,
+  "Поддержка и развитие": LifeBuoy,
+};
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -142,7 +186,15 @@ export default function Home() {
                     viewport={{ once: true }}
                     className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8"
                   >
-                    {slide.title}
+                    <DecryptedText
+                      text={slide.title}
+                      animateOn="view"
+                      sequential={true}
+                      speed={60}
+                      maxIterations={10}
+                      revealDirection="start"
+                      characters="abcdefghijklmnopqrstuvwxyz!@#$%^&*(){}[]<>?/\|;:=+-_~`0123456789"
+                    />
                   </motion.h2>
 
                   <motion.p
@@ -168,25 +220,29 @@ export default function Home() {
                   )}
 
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
-                    {slide.items?.map((item, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                        transition={{
-                          delay: 0.4 + index * 0.08,
-                          duration: 0.5,
-                          ease: [0.22, 1, 0.36, 1]
-                        }}
-                        viewport={{ once: true }}
-                      >
-                        <Card className="bg-white/5 border-white/10 hover:border-[var(--accent)]/50 hover:bg-white/[0.08] transition-all duration-300">
-                          <CardContent className="p-3 md:p-4 flex items-center">
-                            <span className="text-[var(--accent)] text-base font-medium">{item}</span>
-                          </CardContent>
-                        </Card>
-                      </motion.div>
-                    ))}
+                    {slide.items?.map((item, index) => {
+                      const IconComponent = aboutIcons[item];
+                      return (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                          transition={{
+                            delay: 0.4 + index * 0.08,
+                            duration: 0.5,
+                            ease: [0.22, 1, 0.36, 1]
+                          }}
+                          viewport={{ once: true }}
+                        >
+                          <Card className="bg-white/5 border-white/10 hover:border-[var(--accent)]/50 hover:bg-white/[0.08] transition-all duration-300">
+                            <CardContent className="p-4 md:p-5 flex items-center gap-3">
+                              {IconComponent && <IconComponent className="w-5 h-5 text-[var(--accent)]" />}
+                              <span className="text-[var(--accent)] text-base font-medium">{item}</span>
+                            </CardContent>
+                          </Card>
+                        </motion.div>
+                      );
+                    })}
                   </div>
 
                   {slide.badge && (
@@ -262,7 +318,15 @@ export default function Home() {
                         viewport={{ once: true }}
                         className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
                       >
-                        {slide.title}
+                        <DecryptedText
+                          text={slide.title}
+                          animateOn="view"
+                          sequential={true}
+                          speed={60}
+                          maxIterations={10}
+                          revealDirection="start"
+                          characters="abcdefghijklmnopqrstuvwxyz!@#$%^&*(){}[]<>?/\|;:=+-_~`0123456789"
+                        />
                       </motion.h2>
 
                       <motion.p
@@ -360,7 +424,15 @@ export default function Home() {
                     viewport={{ once: true }}
                     className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
                   >
-                    {slide.title}
+                    <DecryptedText
+                      text={slide.title}
+                      animateOn="view"
+                      sequential={true}
+                      speed={60}
+                      maxIterations={10}
+                      revealDirection="start"
+                      characters="abcdefghijklmnopqrstuvwxyz!@#$%^&*(){}[]<>?/\|;:=+-_~`0123456789"
+                    />
                   </motion.h2>
 
                   <motion.p
@@ -386,28 +458,31 @@ export default function Home() {
                   )}
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {slide.items?.map((item, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                        transition={{
-                          delay: 0.4 + index * 0.08,
-                          duration: 0.5,
-                          ease: [0.22, 1, 0.36, 1]
-                        }}
-                        viewport={{ once: true }}
-                      >
-                        <Card className="bg-white/5 border-white/10 hover:border-[var(--accent)]/50 hover:bg-white/[0.08] transition-all duration-300 h-full group">
-                          <CardContent className="p-6 h-full flex flex-col">
-                            <span className="text-4xl font-bold text-[var(--accent)]/30 group-hover:text-[var(--accent)]/50 transition-colors mb-3">
-                              {String(index + 1).padStart(2, '0')}
-                            </span>
-                            <span className="text-white text-lg font-medium">{item}</span>
-                          </CardContent>
-                        </Card>
-                      </motion.div>
-                    ))}
+                    {slide.items?.map((item, index) => {
+                      const IconComponent = solutionsIcons[item];
+                      return (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                          transition={{
+                            delay: 0.4 + index * 0.08,
+                            duration: 0.5,
+                            ease: [0.22, 1, 0.36, 1]
+                          }}
+                          viewport={{ once: true }}
+                        >
+                          <Card className="bg-white/5 border-white/10 hover:border-[var(--accent)]/50 hover:bg-white/[0.08] transition-all duration-300 h-full group">
+                            <CardContent className="p-6 h-full flex flex-col">
+                              {IconComponent && (
+                                <IconComponent className="w-8 h-8 text-[var(--accent)]/50 group-hover:text-[var(--accent)] transition-colors mb-3" />
+                              )}
+                              <span className="text-white text-lg font-medium">{item}</span>
+                            </CardContent>
+                          </Card>
+                        </motion.div>
+                      );
+                    })}
                   </div>
                 </div>
               </Slide>
@@ -435,41 +510,55 @@ export default function Home() {
                     viewport={{ once: true }}
                     className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6"
                   >
-                    {slide.title}
+                    <DecryptedText
+                      text={slide.title}
+                      animateOn="view"
+                      sequential={true}
+                      speed={60}
+                      maxIterations={10}
+                      revealDirection="start"
+                      characters="abcdefghijklmnopqrstuvwxyz!@#$%^&*(){}[]<>?/\|;:=+-_~`0123456789"
+                    />
                   </motion.h2>
 
                   <div className="space-y-4">
-                    {slide.cards?.map((card, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{
-                          delay: 0.2 + index * 0.15,
-                          duration: 0.6,
-                          ease: [0.22, 1, 0.36, 1]
-                        }}
-                        viewport={{ once: true }}
-                      >
-                        <Card className="bg-white/5 border-white/10 hover:border-[var(--accent)]/30 transition-all duration-300">
-                          <CardContent className="p-4 md:p-5">
-                            <h3 className="text-lg md:text-xl font-bold text-[var(--accent)] mb-2">
-                              {card.title}
-                            </h3>
-                            <div className="space-y-1">
-                              {card.items.map((item, itemIndex) => (
-                                <p key={itemIndex} className="text-sm md:text-base text-white/80 leading-relaxed">
-                                  {item}
-                                </p>
-                              ))}
-                            </div>
-                          </CardContent>
-                        </Card>
+                    {slide.cards?.map((card, index) => {
+                      const IconComponent = philosophyIcons[card.title];
+                      return (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, x: -30 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{
+                            delay: 0.2 + index * 0.15,
+                            duration: 0.6,
+                            ease: [0.22, 1, 0.36, 1]
+                          }}
+                          viewport={{ once: true }}
+                        >
+                          <Card className="bg-white/5 border-white/10 hover:border-[var(--accent)]/30 transition-all duration-300">
+                            <CardContent className="p-4 md:p-5">
+                              <div className="flex items-center gap-3 mb-2">
+                                {IconComponent && <IconComponent className="w-6 h-6 text-[var(--accent)]" />}
+                                <h3 className="text-lg md:text-xl font-bold text-[var(--accent)]">
+                                  {card.title}
+                                </h3>
+                              </div>
+                              <div className="space-y-1 ml-9">
+                                {card.items.map((item, itemIndex) => (
+                                  <p key={itemIndex} className="text-sm md:text-base text-white/80 leading-relaxed">
+                                    {item}
+                                  </p>
+                                ))}
+                              </div>
+                            </CardContent>
+                          </Card>
                         {index < (slide.cards?.length || 0) - 1 && (
                           <Separator className="my-4 bg-white/10" />
                         )}
                       </motion.div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </Slide>
@@ -478,7 +567,7 @@ export default function Home() {
           case "section-header":
             return (
               <Slide key={slide.id} id={slide.id} className="items-center text-center relative z-10">
-                <div className="max-w-4xl mx-auto">
+                <div className="max-w-6xl mx-auto">
                   <motion.div
                     initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
                     whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -494,9 +583,17 @@ export default function Home() {
                     whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                     transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                     viewport={{ once: true }}
-                    className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
+                    className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 whitespace-nowrap"
                   >
-                    {slide.title}
+                    <DecryptedText
+                      text={slide.title}
+                      animateOn="view"
+                      sequential={true}
+                      speed={60}
+                      maxIterations={10}
+                      revealDirection="start"
+                      characters="abcdefghijklmnopqrstuvwxyz!@#$%^&*(){}[]<>?/\|;:=+-_~`0123456789"
+                    />
                   </motion.h2>
                   {slide.content && (
                     <motion.p
@@ -570,7 +667,15 @@ export default function Home() {
                     viewport={{ once: true }}
                     className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8"
                   >
-                    {slide.title}
+                    <DecryptedText
+                      text={slide.title}
+                      animateOn="view"
+                      sequential={true}
+                      speed={60}
+                      maxIterations={10}
+                      revealDirection="start"
+                      characters="abcdefghijklmnopqrstuvwxyz!@#$%^&*(){}[]<>?/\|;:=+-_~`0123456789"
+                    />
                   </motion.h2>
                   {slide.content && (
                     <motion.div
@@ -601,7 +706,15 @@ export default function Home() {
                     viewport={{ once: true }}
                     className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-12 text-center"
                   >
-                    {slide.title}
+                    <DecryptedText
+                      text={slide.title}
+                      animateOn="view"
+                      sequential={true}
+                      speed={60}
+                      maxIterations={10}
+                      revealDirection="start"
+                      characters="abcdefghijklmnopqrstuvwxyz!@#$%^&*(){}[]<>?/\|;:=+-_~`0123456789"
+                    />
                   </motion.h2>
 
                   {slide.stages && (
@@ -700,7 +813,15 @@ export default function Home() {
                     viewport={{ once: true }}
                     className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
                   >
-                    {slide.title}
+                    <DecryptedText
+                      text={slide.title}
+                      animateOn="view"
+                      sequential={true}
+                      speed={60}
+                      maxIterations={10}
+                      revealDirection="start"
+                      characters="abcdefghijklmnopqrstuvwxyz!@#$%^&*(){}[]<>?/\|;:=+-_~`0123456789"
+                    />
                   </motion.h2>
                   {slide.content && (
                     <motion.p
@@ -793,7 +914,15 @@ export default function Home() {
                     viewport={{ once: true }}
                     className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
                   >
-                    {slide.title}
+                    <DecryptedText
+                      text={slide.title}
+                      animateOn="view"
+                      sequential={true}
+                      speed={60}
+                      maxIterations={10}
+                      revealDirection="start"
+                      characters="abcdefghijklmnopqrstuvwxyz!@#$%^&*(){}[]<>?/\|;:=+-_~`0123456789"
+                    />
                   </motion.h2>
                   {slide.content && (
                     <motion.p
